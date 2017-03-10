@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+ 	    body {
+    		background-image: url("logo.png");
+    		background-repeat: repeat;
+	    }
+            table {
+                background: #FFFFFF;
+                border-collapse: collapse;
+                border: 2px #006EFF solid;
+                font: 14px sans-serif;
+                font-weight: bold;
+                text-shadow: 1px 1px 1px #888;
+            }
+
+            td {
+                background: #FFFFFF;
+                border: 1px #006EFF solid;
+                padding: 5px;
+            }
+            h1 {
+                background: #FFFFFF;
+                color: #006EFF;
+                font-weight: bold;
+                text=shadow: 1px 1px 1px #888;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <h1>Flying-Toaster Report:</h1>
+        <script type="text/javascript"charset="utf-8">
+            d3.text("egress_results.csv", function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
+
+                var container = d3.select("body")
+                    .append("table")
+
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+        </script>
+    </body>
+</html>
